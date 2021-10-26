@@ -19,7 +19,7 @@ $(package)_rust_target_x86_64-linux-gnu=x86_64-unknown-linux-gnu
 $(package)_rust_target_x86_64-pc-linux-gnu=x86_64-unknown-linux-gnu
 
 # Mapping from Rust targets to SHA-256 hashes
-$(package)_rust_std_sha256_hash_arm-unknown-linux-gnueabihf=f91d28115a46eb9af5bb73bb776269534e02add1125346b2dd7e29ecf34da892
+$(package)_rust_std_sha256_hash_arm-unknown-linux-gnueabihf=538790218a9515ef8e32c29a3f6d0d242281345fc8a5f0b0e1452bd350633e15
 $(package)_rust_std_sha256_hash_aarch64-unknown-linux-gnu=782b2ab52d062ecc7077ddbfff1f21b553ac21845688a75aed45d70214a3c3e7
 $(package)_rust_std_sha256_hash_i686-unknown-linux-gnu=58191b8ccc78bbd288285a8e9b03c5e473ffbdf9d79c7262130202454f17c41f
 $(package)_rust_std_sha256_hash_x86_64-unknown-linux-gnu=016c9619bdbb8023876579ed97ade2f8b049696c2163f7518328b77b2c274f25

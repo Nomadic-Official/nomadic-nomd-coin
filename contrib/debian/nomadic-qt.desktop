@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=NOMADIC Core
+Comment=NOMADIC P2P Cryptocurrency
+Comment[fr]=NOMADIC, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=NOMADIC, eşten eşe kriptografik sanal para birimi
+Exec=nomadic-qt %u
+Terminal=false
+Type=Application
+Icon=nomadic128
+MimeType=x-scheme-handler/nomadic;
+Categories=Office;Finance;
+StartupWMClass=Nomadic-qt

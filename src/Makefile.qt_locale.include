@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/nomadic_de.ts \
+  qt/locale/nomadic_en.ts \
+  qt/locale/nomadic_en_US.ts \
+  qt/locale/nomadic_es.ts \
+  qt/locale/nomadic_es_ES.ts \
+  qt/locale/nomadic_fr_FR.ts \
+  qt/locale/nomadic_hr_HR.ts \
+  qt/locale/nomadic_it.ts \
+  qt/locale/nomadic_ko_KR.ts \
+  qt/locale/nomadic_nl.ts \
+  qt/locale/nomadic_pl.ts \
+  qt/locale/nomadic_ru.ts \
+  qt/locale/nomadic_tr.ts \
+  qt/locale/nomadic_zh_CN.ts

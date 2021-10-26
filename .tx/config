@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[nomadic-project-translations.qt-translation-50x]
+file_filter = src/qt/locale/nomadic_<lang>.ts
+source_file = src/qt/locale/nomadic_en.ts
+source_lang = en

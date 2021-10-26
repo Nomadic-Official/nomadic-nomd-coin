@@ -1,0 +1,6 @@
+usr/local/bin/nomadic-qt usr/bin
+share/pixmaps/nomadic32.xpm usr/share/pixmaps
+share/pixmaps/nomadic16.xpm usr/share/pixmaps
+share/pixmaps/nomadic128.png usr/share/pixmaps
+debian/nomadic-qt.desktop usr/share/applications
+debian/nomadic-qt.protocol usr/share/kde4/services/

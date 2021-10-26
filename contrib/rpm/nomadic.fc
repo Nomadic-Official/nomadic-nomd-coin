@@ -1,0 +1,8 @@
+/usr/bin/nomadic-cli		--	gen_context(system_u:object_r:nomadic_exec_t,s0)
+/usr/sbin/nomadicd		--	gen_context(system_u:object_r:nomadic_exec_t,s0)
+/usr/lib(64)?/nomadic/nomadicd		--	gen_context(system_u:object_r:nomadic_exec_t,s0)
+
+/etc/nomadic(/.*)?		gen_context(system_u:object_r:nomadic_conf_t,s0)
+/var/lib/nomadic(/.*)?		gen_context(system_u:object_r:nomadic_var_lib_t,s0)
+
+(/var)?/run/nomadicd(/.*)?   gen_context(system_u:object_r:nomadic_var_run_t,s0)

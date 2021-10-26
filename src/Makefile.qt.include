@@ -1,0 +1,727 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/nomadic-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# nomadic qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/nomadic/forms/loadingdialog.ui \
+  qt/nomadic/forms/snackbar.ui \
+  qt/nomadic/forms/navmenuwidget.ui \
+  qt/nomadic/forms/lockunlock.ui \
+  qt/nomadic/forms/expandablebutton.ui \
+  qt/nomadic/forms/receivedialog.ui \
+  qt/nomadic/forms/balancebubble.ui \
+  qt/nomadic/forms/topbar.ui \
+  qt/nomadic/forms/txrow.ui \
+  qt/nomadic/forms/dashboardwidget.ui \
+  qt/nomadic/forms/addresslabelrow.ui \
+  qt/nomadic/forms/contactdropdownrow.ui \
+  qt/nomadic/forms/mninfodialog.ui \
+  qt/nomadic/forms/optionbutton.ui \
+  qt/nomadic/forms/masternodewizarddialog.ui \
+  qt/nomadic/forms/mnrow.ui \
+  qt/nomadic/forms/masternodeswidget.ui \
+  qt/nomadic/forms/myaddressrow.ui \
+  qt/nomadic/forms/csrow.ui \
+  qt/nomadic/forms/sendmemodialog.ui \
+  qt/nomadic/forms/sendchangeaddressdialog.ui \
+  qt/nomadic/forms/sendconfirmdialog.ui \
+  qt/nomadic/forms/sendcustomfeedialog.ui \
+  qt/nomadic/forms/sendmultirow.ui \
+  qt/nomadic/forms/send.ui \
+  qt/nomadic/forms/addnewaddressdialog.ui \
+  qt/nomadic/forms/addnewcontactdialog.ui \
+  qt/nomadic/forms/requestdialog.ui \
+  qt/nomadic/forms/receivewidget.ui \
+  qt/nomadic/forms/tooltipmenu.ui \
+  qt/nomadic/forms/addresseswidget.ui \
+  qt/nomadic/forms/defaultdialog.ui \
+  qt/nomadic/forms/coldstakingwidget.ui \
+  qt/nomadic/settings/forms/settingsbackupwallet.ui \
+  qt/nomadic/settings/forms/settingsexportcsv.ui \
+  qt/nomadic/settings/forms/settingsbittoolwidget.ui \
+  qt/nomadic/settings/forms/settingsconsolewidget.ui \
+  qt/nomadic/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/nomadic/settings/forms/settingsfaqwidget.ui \
+  qt/nomadic/settings/forms/settingsinformationwidget.ui \
+  qt/nomadic/settings/forms/settingsmainoptionswidget.ui \
+  qt/nomadic/settings/forms/settingsmultisenddialog.ui \
+  qt/nomadic/settings/forms/settingsmultisendwidget.ui \
+  qt/nomadic/settings/forms/settingssignmessagewidgets.ui \
+  qt/nomadic/settings/forms/settingswalletoptionswidget.ui \
+  qt/nomadic/settings/forms/settingswalletrepairwidget.ui \
+  qt/nomadic/settings/forms/settingswidget.ui \
+  qt/nomadic/forms/welcomecontentwidget.ui \
+  qt/nomadic/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/nomadic/moc_nomadicgui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/nomadic/moc_loadingdialog.cpp \
+  qt/nomadic/moc_pwidget.cpp \
+  qt/nomadic/moc_focuseddialog.cpp \
+  qt/nomadic/moc_snackbar.cpp \
+  qt/nomadic/moc_navmenuwidget.cpp \
+  qt/nomadic/moc_lockunlock.cpp \
+  qt/nomadic/moc_expandablebutton.cpp \
+  qt/nomadic/moc_furabstractlistitemdelegate.cpp \
+  qt/nomadic/moc_receivedialog.cpp \
+  qt/nomadic/moc_pfborderimage.cpp \
+  qt/nomadic/moc_topbar.cpp \
+  qt/nomadic/moc_txrow.cpp \
+  qt/nomadic/moc_dashboardwidget.cpp \
+  qt/nomadic/moc_addresslabelrow.cpp \
+  qt/nomadic/moc_contactdropdownrow.cpp \
+  qt/nomadic/moc_mninfodialog.cpp \
+  qt/nomadic/moc_optionbutton.cpp \
+  qt/nomadic/moc_coldstakingmodel.cpp \
+  qt/nomadic/moc_mnmodel.cpp \
+  qt/nomadic/moc_masternodewizarddialog.cpp \
+  qt/nomadic/moc_mnrow.cpp \
+  qt/nomadic/moc_masternodeswidget.cpp \
+  qt/nomadic/moc_myaddressrow.cpp \
+  qt/nomadic/moc_csrow.cpp \
+  qt/nomadic/moc_contactsdropdown.cpp \
+  qt/nomadic/moc_sendchangeaddressdialog.cpp \
+  qt/nomadic/moc_sendconfirmdialog.cpp \
+  qt/nomadic/moc_sendcustomfeedialog.cpp \
+  qt/nomadic/moc_sendmemodialog.cpp \
+  qt/nomadic/moc_sendmultirow.cpp \
+  qt/nomadic/moc_send.cpp \
+  qt/nomadic/moc_addnewaddressdialog.cpp \
+  qt/nomadic/moc_addnewcontactdialog.cpp \
+  qt/nomadic/moc_requestdialog.cpp \
+  qt/nomadic/moc_receivewidget.cpp \
+  qt/nomadic/moc_tooltipmenu.cpp \
+  qt/nomadic/moc_addresseswidget.cpp \
+  qt/nomadic/moc_defaultdialog.cpp \
+  qt/nomadic/moc_coldstakingwidget.cpp \
+  qt/nomadic/settings/moc_settingsbackupwallet.cpp \
+  qt/nomadic/settings/moc_settingsexportcsv.cpp \
+  qt/nomadic/settings/moc_settingsbittoolwidget.cpp \
+  qt/nomadic/settings/moc_settingsconsolewidget.cpp \
+  qt/nomadic/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/nomadic/settings/moc_settingsfaqwidget.cpp \
+  qt/nomadic/settings/moc_settingsinformationwidget.cpp \
+  qt/nomadic/settings/moc_settingsmainoptionswidget.cpp \
+  qt/nomadic/settings/moc_settingsmultisenddialog.cpp \
+  qt/nomadic/settings/moc_settingsmultisendwidget.cpp \
+  qt/nomadic/settings/moc_settingssignmessagewidgets.cpp \
+  qt/nomadic/settings/moc_settingswalletoptionswidget.cpp \
+  qt/nomadic/settings/moc_settingswalletrepairwidget.cpp \
+  qt/nomadic/settings/moc_settingswidget.cpp \
+  qt/nomadic/moc_welcomecontentwidget.cpp \
+  qt/nomadic/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/nomadic.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/nomadic/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_nomadic.cpp
+QT_QRC = qt/nomadic.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_nomadic_locale.cpp
+QT_QRC_LOCALE = qt/nomadic_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/nomadic/nomadicgui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/nomadic/prunnable.h \
+  qt/nomadic/pfborderimage.h \
+  qt/nomadic/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/nomadic/pwidget.h \
+  qt/nomadic/focuseddialog.h \
+  qt/nomadic/guitransactionsutils.h \
+  qt/nomadic/snackbar.h \
+  qt/nomadic/navmenuwidget.h \
+  qt/nomadic/lockunlock.h \
+  qt/nomadic/receivedialog.h \
+  qt/nomadic/furlistrow.h \
+  qt/nomadic/furabstractlistitemdelegate.h \
+  qt/nomadic/txviewholder.h \
+  qt/nomadic/qtutils.h \
+  qt/nomadic/expandablebutton.h \
+  qt/nomadic/balancebubble.h \
+  qt/nomadic/topbar.h \
+  qt/nomadic/txrow.h \
+  qt/nomadic/addressholder.h \
+  qt/nomadic/addressfilterproxymodel.h \
+  qt/nomadic/dashboardwidget.h \
+  qt/nomadic/addresslabelrow.h \
+  qt/nomadic/contactdropdownrow.h \
+  qt/nomadic/mninfodialog.h \
+  qt/nomadic/optionbutton.h \
+  qt/nomadic/coldstakingmodel.h \
+  qt/nomadic/mnmodel.h \
+  qt/nomadic/masternodewizarddialog.h \
+  qt/nomadic/mnrow.h \
+  qt/nomadic/masternodeswidget.h \
+  qt/nomadic/myaddressrow.h \
+  qt/nomadic/csrow.h \
+  qt/nomadic/contactsdropdown.h \
+  qt/nomadic/sendchangeaddressdialog.h \
+  qt/nomadic/sendconfirmdialog.h \
+  qt/nomadic/sendcustomfeedialog.h \
+  qt/nomadic/sendmemodialog.h \
+  qt/nomadic/sendmultirow.h \
+  qt/nomadic/send.h \
+  qt/nomadic/addnewaddressdialog.h \
+  qt/nomadic/addnewcontactdialog.h \
+  qt/nomadic/requestdialog.h \
+  qt/nomadic/receivewidget.h \
+  qt/nomadic/tooltipmenu.h \
+  qt/nomadic/addresseswidget.h \
+  qt/nomadic/defaultdialog.h \
+  qt/nomadic/coldstakingwidget.h \
+  qt/nomadic/settings/settingsbackupwallet.h \
+  qt/nomadic/settings/settingsexportcsv.h \
+  qt/nomadic/settings/settingsbittoolwidget.h \
+  qt/nomadic/settings/settingsconsolewidget.h \
+  qt/nomadic/settings/settingsdisplayoptionswidget.h \
+  qt/nomadic/settings/settingsfaqwidget.h \
+  qt/nomadic/settings/settingsinformationwidget.h \
+  qt/nomadic/settings/settingsmainoptionswidget.h \
+  qt/nomadic/settings/settingsmultisenddialog.h \
+  qt/nomadic/settings/settingsmultisendwidget.h \
+  qt/nomadic/settings/settingssignmessagewidgets.h \
+  qt/nomadic/settings/settingswalletoptionswidget.h \
+  qt/nomadic/settings/settingswalletrepairwidget.h \
+  qt/nomadic/settings/settingswidget.h \
+  qt/nomadic/welcomecontentwidget.h \
+  qt/nomadic/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/nomadic/res/img/bg-dashboard-banner.png \
+  qt/nomadic/res/img/bg-multi-number-dark.svg \
+  qt/nomadic/res/img/ic-check-locked.svg \
+  qt/nomadic/res/img/ic-nav-address.svg \
+  qt/nomadic/res/img/ic-update.svg \
+  qt/nomadic/res/img/bg-multi-number.svg \
+  qt/nomadic/res/img/ic-check-mint-off.svg \
+  qt/nomadic/res/img/ic-nav-cold-staking.svg \
+  qt/nomadic/res/img/ic-nav-cold-staking-active.svg \
+  qt/nomadic/res/img/ic-nav-dashboard-active.svg \
+  qt/nomadic/res/img/ic-wallet-status-locked.svg \
+  qt/nomadic/res/img/bg-splash.svg \
+  qt/nomadic/res/img/bg-splash.png \
+  qt/nomadic/res/img/ic-check-mint.svg \
+  qt/nomadic/res/img/ic-nav-dashboard-hover.svg \
+  qt/nomadic/res/img/ic-wallet-status-staking.svg \
+  qt/nomadic/res/img/ic-check-peers-off.svg \
+  qt/nomadic/res/img/ic-nav-dashboard.svg \
+  qt/nomadic/res/img/ic-wallet-status-unlocked.svg \
+  qt/nomadic/res/img/ic-check-peers.svg \
+  qt/nomadic/res/img/ic-nav-master-active.svg \
+  qt/nomadic/res/img/ic-watch-password-white.svg \
+  qt/nomadic/res/img/bg-welcome-container.jpg \
+  qt/nomadic/res/img/bg-welcome-container.png \
+  qt/nomadic/res/img/bg-welcome-container.svg \
+  qt/nomadic/res/img/bg-welcome-container@2x.png \
+  qt/nomadic/res/img/bg-welcome-container@3x.png \
+  qt/nomadic/res/img/ic-check-staking-off.svg \
+  qt/nomadic/res/img/ic-nav-master-hover.svg \
+  qt/nomadic/res/img/ic-watch-password.svg \
+  qt/nomadic/res/img/bg-welcome.jpg \
+  qt/nomadic/res/img/bg-welcome.svg \
+  qt/nomadic/res/img/bg-welcome@2x.jpg \
+  qt/nomadic/res/img/bg-welcome@3x.jpg \
+  qt/nomadic/res/img/bg-welcome.png \
+  qt/nomadic/res/img/ic-check-staking.svg \
+  qt/nomadic/res/img/ic-nav-master.svg \
+  qt/nomadic/res/img/img-dashboard-banner.jpg \
+  qt/nomadic/res/img/btn-radio-active.svg \
+  qt/nomadic/res/img/ic-check-sync-off.svg \
+  qt/nomadic/res/img/ic-nav-privacy-active.svg \
+  qt/nomadic/res/img/img-empty-contacts.svg \
+  qt/nomadic/res/img/btn-radio-off.svg \
+  qt/nomadic/res/img/ic-check-sync.png \
+  qt/nomadic/res/img/ic-nav-privacy-hover.svg \
+  qt/nomadic/res/img/img-empty-dark-contacts.svg \
+  qt/nomadic/res/img/ic-contact-arrow-down.svg \
+  qt/nomadic/res/img/ic-contact-arrow-down-white.svg \
+  qt/nomadic/res/img/ic-check-sync.svg \
+  qt/nomadic/res/img/ic-check-faq.svg \
+  qt/nomadic/res/img/ic-nav-privacy.svg \
+  qt/nomadic/res/img/img-empty-dark-error.svg \
+  qt/nomadic/res/img/ic-add-label.svg \
+  qt/nomadic/res/img/ic-pending.svg \
+  qt/nomadic/res/img/ic-check-theme-dark.svg \
+  qt/nomadic/res/img/ic-nav-receive-active.svg \
+  qt/nomadic/res/img/img-empty-dark-masternode.svg \
+  qt/nomadic/res/img/ic-add-liliac.svg \
+  qt/nomadic/res/img/ic-check-theme-light.svg \
+  qt/nomadic/res/img/ic-nav-receive-hover.svg \
+  qt/nomadic/res/img/img-empty-dark-multisend.svg \
+  qt/nomadic/res/img/ic-add-purple.svg \
+  qt/nomadic/res/img/ic-check-white.svg \
+  qt/nomadic/res/img/ic-nav-receive.svg \
+  qt/nomadic/res/img/img-empty-dark-peers.svg \
+  qt/nomadic/res/img/ic-add.svg \
+  qt/nomadic/res/img/ic-check.svg \
+  qt/nomadic/res/img/ic-nav-send-active.svg \
+  qt/nomadic/res/img/img-empty-dark-staking-off.svg \
+  qt/nomadic/res/img/img-empty-dark-staking-on.svg \
+  qt/nomadic/res/img/ic-address-book-grey.svg \
+  qt/nomadic/res/img/ic-chevron-left.svg \
+  qt/nomadic/res/img/ic-nav-send-hover.svg \
+  qt/nomadic/res/img/img-empty-dark-transactions.svg \
+  qt/nomadic/res/img/ic-address-book-white.svg \
+  qt/nomadic/res/img/ic-chevron-right.svg \
+  qt/nomadic/res/img/ic-chevron-right-liliac.svg \
+  qt/nomadic/res/img/ic-nav-send.svg \
+  qt/nomadic/res/img/img-empty-error.svg \
+  qt/nomadic/res/img/ic-address-book.svg \
+  qt/nomadic/res/img/ic-clear-liliac.svg \
+  qt/nomadic/res/img/ic-nav-settings-active.svg \
+  qt/nomadic/res/img/img-empty-masternode.svg \
+  qt/nomadic/res/img/ic-address-send-white.svg \
+  qt/nomadic/res/img/ic-clear-purple.svg \
+  qt/nomadic/res/img/ic-nav-settings-hover.svg \
+  qt/nomadic/res/img/img-empty-multisend.svg \
+  qt/nomadic/res/img/ic-address-send.svg \
+  qt/nomadic/res/img/ic-close-white.svg \
+  qt/nomadic/res/img/ic-nav-settings.svg \
+  qt/nomadic/res/img/img-empty-peers.svg \
+  qt/nomadic/res/img/img-empty-privacy.svg \
+  qt/nomadic/res/img/img-empty-privacy-dark.svg \
+  qt/nomadic/res/img/ic-arrow-drop-down-white.svg \
+  qt/nomadic/res/img/ic-close.svg \
+  qt/nomadic/res/img/ic-radio-liliac-on.svg \
+  qt/nomadic/res/img/img-empty-staking-off.svg \
+  qt/nomadic/res/img/ic-arrow-drop-down.svg \
+  qt/nomadic/res/img/ic-coin-nomd.svg \
+  qt/nomadic/res/img/ic-receive-off.svg \
+  qt/nomadic/res/img/img-empty-staking-on.svg \
+  qt/nomadic/res/img/ic-arrow-drop-up-white.svg \
+  qt/nomadic/res/img/ic-coin-znomd.png \
+  qt/nomadic/res/img/ic-receive-on.svg \
+  qt/nomadic/res/img/img-empty-transactions.svg \
+  qt/nomadic/res/img/ic-arrow-drop-up.svg \
+  qt/nomadic/res/img/ic-coin-znomd.svg \
+  qt/nomadic/res/img/ic-received.svg \
+  qt/nomadic/res/img/img-logo-nomadic.png \
+  qt/nomadic/res/img/ic-arrow-drop-white-down.svg \
+  qt/nomadic/res/img/ic-combo-box.svg \
+  qt/nomadic/res/img/ic-send.svg \
+  qt/nomadic/res/img/img-logo-nomadic@2x.png \
+  qt/nomadic/res/img/ic-arrow-purple-down.svg \
+  qt/nomadic/res/img/ic-connect.svg \
+  qt/nomadic/res/img/ic-submenu-lock.svg \
+  qt/nomadic/res/img/img-logo-nomadic@3x.png \
+  qt/nomadic/res/img/img-logo-nomadic.svg \
+  qt/nomadic/res/img/ic-arrow-right-white.svg \
+  qt/nomadic/res/img/ic-arrow-left-white.svg \
+  qt/nomadic/res/img/ic-arrow-left.svg \
+  qt/nomadic/res/img/ic-copy-liliac.svg \
+  qt/nomadic/res/img/ic-submenu-staking.svg \
+  qt/nomadic/res/img/img-nav-logo-nomadic.png \
+  qt/nomadic/res/img/ic-arrow-right.svg \
+  qt/nomadic/res/img/ic-copy.svg \
+  qt/nomadic/res/img/ic-copy-big.svg \
+  qt/nomadic/res/img/ic-copy-big-white.svg \
+  qt/nomadic/res/img/ic-submenu-unlock.svg \
+  qt/nomadic/res/img/img-nav-logo.png \
+  qt/nomadic/res/img/ic-arrow-white-left.svg \
+  qt/nomadic/res/img/ic-exit.svg \
+  qt/nomadic/res/img/ic-switch-liliac-on.svg \
+  qt/nomadic/res/img/img-nav-logo.svg \
+  qt/nomadic/res/img/ic-arrow-white-right.svg \
+  qt/nomadic/res/img/ic-expand.svg \
+  qt/nomadic/res/img/ic-switch-off.svg \
+  qt/nomadic/res/img/img-qr-test-big.png \
+  qt/nomadic/res/img/ic-check-active.svg \
+  qt/nomadic/res/img/ic-folder.svg \
+  qt/nomadic/res/img/ic-switch-on.svg \
+  qt/nomadic/res/img/img-qr-test.png \
+  qt/nomadic/res/img/ic-check-box.svg \
+  qt/nomadic/res/img/ic-check-box-dark-active.svg \
+  qt/nomadic/res/img/ic-check-box-indeterminate.svg \
+  qt/nomadic/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/nomadic/res/img/ic-label-liliac.svg \
+  qt/nomadic/res/img/ic-transaction-warning.svg \
+  qt/nomadic/res/img/ic-transaction-mint.svg \
+  qt/nomadic/res/img/ic-transaction-mint-inactive.svg \
+  qt/nomadic/res/img/ic-check-cold-staking.svg \
+  qt/nomadic/res/img/ic-check-cold-staking-off.svg \
+  qt/nomadic/res/img/ic-check-cold-staking-enabled.svg \
+  qt/nomadic/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/nomadic/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/nomadic/res/img/img-qr.svg \
+  qt/nomadic/res/img/ic-check-connect-off.svg \
+  qt/nomadic/res/img/ic-check-tor-off.svg \
+  qt/nomadic/res/img/ic-check-tor.svg \
+  qt/nomadic/res/img/ic-label.svg \
+  qt/nomadic/res/img/ic-transaction-received.svg \
+  qt/nomadic/res/img/dark/ic-transaction-received.svg \
+  qt/nomadic/res/img/dark/ic-transaction-warning.svg \
+  qt/nomadic/res/img/dark/ic-transaction-mint.svg \
+  qt/nomadic/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/nomadic/res/img/ic-transaction-received-inactive.svg \
+  qt/nomadic/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/nomadic/res/img/img-welcome-step1.png \
+  qt/nomadic/res/img/ic-check-connect.svg \
+  qt/nomadic/res/img/ic-menu-hover.svg \
+  qt/nomadic/res/img/ic-transaction-sent.svg \
+  qt/nomadic/res/img/ic-transaction-sent-inactive.svg \
+  qt/nomadic/res/img/dark/ic-transaction-sent.svg \
+  qt/nomadic/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/nomadic/res/img/img-welcome-step2.png \
+  qt/nomadic/res/img/ic-check-dark.svg \
+  qt/nomadic/res/img/ic-mint.svg \
+  qt/nomadic/res/img/ic-transaction-staked.svg \
+  qt/nomadic/res/img/ic-transaction-staked-inactive.svg \
+  qt/nomadic/res/img/dark/ic-transaction-staked.svg \
+  qt/nomadic/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/nomadic/res/img/img-welcome-step3.png \
+  qt/nomadic/res/img/ic-check-liliac-on.svg \
+  qt/nomadic/res/img/ic-nav-address-active.svg \
+  qt/nomadic/res/img/ic-unlock-staking.svg \
+  qt/nomadic/res/img/img-welcome-step4.png \
+  qt/nomadic/res/img/ic-check-locked-off.svg \
+  qt/nomadic/res/img/ic-nav-address-hover.svg \
+  qt/nomadic/res/img/ic-update-liliac.svg \
+  qt/nomadic/res/img/ic-arrow-drop-down-purple.svg \
+  qt/nomadic/res/img/ic-arrow-drop-up-purple.svg \
+  qt/nomadic/res/img/ic-check-liliac-indeterminate.svg \
+  qt/nomadic/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/nomadic/res/img/ic-transaction-stake-delegated.svg \
+  qt/nomadic/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/nomadic/res/img/ic-transaction-stake-hot.svg \
+  qt/nomadic/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/nomadic/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/nomadic/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/nomadic/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/nomadic/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/nomadic/res/img/ic-transaction-cs-contract.svg \
+  qt/nomadic/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/nomadic/res/img/ic-check-box-indeterminate.svg \
+  qt/nomadic/res/img/ic-information.svg \
+  qt/nomadic/res/img/ic-information-hover.svg \
+  qt/nomadic/res/img/ani-loading-dark.gif \
+  qt/nomadic/res/img/ani-loading.gif
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/nomadic/nomadicgui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/nomadic/loadingdialog.cpp \
+  qt/nomadic/pwidget.cpp \
+  qt/nomadic/focuseddialog.cpp \
+  qt/nomadic/guitransactionsutils.cpp \
+  qt/nomadic/snackbar.cpp \
+  qt/nomadic/navmenuwidget.cpp \
+  qt/nomadic/lockunlock.cpp \
+  qt/nomadic/receivedialog.cpp \
+  qt/nomadic/furabstractlistitemdelegate.cpp \
+  qt/nomadic/txviewholder.cpp \
+  qt/nomadic/qtutils.cpp \
+  qt/nomadic/expandablebutton.cpp \
+  qt/nomadic/balancebubble.cpp \
+  qt/nomadic/topbar.cpp \
+  qt/nomadic/txrow.cpp \
+  qt/nomadic/addressholder.cpp \
+  qt/nomadic/addressfilterproxymodel.cpp \
+  qt/nomadic/dashboardwidget.cpp \
+  qt/nomadic/addresslabelrow.cpp \
+  qt/nomadic/contactdropdownrow.cpp \
+  qt/nomadic/contactsdropdown.cpp \
+  qt/nomadic/optionbutton.cpp \
+  qt/nomadic/mninfodialog.cpp \
+  qt/nomadic/coldstakingmodel.cpp \
+  qt/nomadic/mnmodel.cpp \
+  qt/nomadic/masternodewizarddialog.cpp \
+  qt/nomadic/mnrow.cpp \
+  qt/nomadic/masternodeswidget.cpp \
+  qt/nomadic/myaddressrow.cpp \
+  qt/nomadic/csrow.cpp \
+  qt/nomadic/sendchangeaddressdialog.cpp \
+  qt/nomadic/sendconfirmdialog.cpp \
+  qt/nomadic/sendcustomfeedialog.cpp \
+  qt/nomadic/sendmemodialog.cpp \
+  qt/nomadic/sendmultirow.cpp \
+  qt/nomadic/send.cpp \
+  qt/nomadic/addnewaddressdialog.cpp \
+  qt/nomadic/addnewcontactdialog.cpp \
+  qt/nomadic/requestdialog.cpp \
+  qt/nomadic/receivewidget.cpp \
+  qt/nomadic/tooltipmenu.cpp \
+  qt/nomadic/addresseswidget.cpp \
+  qt/nomadic/defaultdialog.cpp \
+  qt/nomadic/coldstakingwidget.cpp \
+  qt/nomadic/settings/settingsbackupwallet.cpp \
+  qt/nomadic/settings/settingsexportcsv.cpp \
+  qt/nomadic/settings/settingsbittoolwidget.cpp \
+  qt/nomadic/settings/settingsconsolewidget.cpp \
+  qt/nomadic/settings/settingsdisplayoptionswidget.cpp \
+  qt/nomadic/settings/settingsfaqwidget.cpp \
+  qt/nomadic/settings/settingsinformationwidget.cpp \
+  qt/nomadic/settings/settingsmainoptionswidget.cpp \
+  qt/nomadic/settings/settingsmultisenddialog.cpp \
+  qt/nomadic/settings/settingsmultisendwidget.cpp \
+  qt/nomadic/settings/settingssignmessagewidgets.cpp \
+  qt/nomadic/settings/settingswalletoptionswidget.cpp \
+  qt/nomadic/settings/settingswalletrepairwidget.cpp \
+  qt/nomadic/settings/settingswidget.cpp \
+  qt/nomadic/welcomecontentwidget.cpp \
+  qt/nomadic/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/nomadic/res/css/style_dark.css \
+  qt/nomadic/res/css/style_light.css
+
+BITCOIN_RC = qt/res/nomadic-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_nomadic_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# nomadic-qt binary #
+qt_nomadic_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_nomadic_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_nomadic_qt_SOURCES = qt/nomadic.cpp
+if TARGET_DARWIN
+  qt_nomadic_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_nomadic_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_nomadic_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_nomadic_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_nomadic_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_nomadic_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_nomadic_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_nomadic_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/nomadicstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/nomadicstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/nomadic.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/nomadic_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name nomadic_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name nomadic $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/nomadic/*.gcda qt/nomadic/*.gcno qt/nomadic/settings/*.gcda qt/nomadic/settings/*.gcno qt/temp_nomadic_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+nomadic_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_nomadic_qt_OBJECTS) qt/nomadic-qt$(EXEEXT) $(LIBBITCOINQT)
+
+nomadic_qt : qt/nomadic-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

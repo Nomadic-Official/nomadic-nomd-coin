@@ -49,7 +49,7 @@ class MasternodeActivationTest(NomadicTier2TestFramework):
         mnCollateralOutput = self.ownerOne.getmasternodeoutputs()[0]
         assert_equal(mnCollateralOutput["txhash"], self.mnOneTxHash)
         mnCollateralOutputIndex = mnCollateralOutput["outputidx"]
-        send_value = satoshi_round(10000 - 0.001)
+        send_value = satoshi_round(100000 - 0.001)
         inputs = [{'txid' : self.mnOneTxHash, 'vout' : mnCollateralOutputIndex}]
         outputs = {}
         outputs[self.ownerOne.getnewaddress()] = float(send_value)

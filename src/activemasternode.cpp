@@ -73,7 +73,7 @@ OperationResult initMasternode(const std::string& _strMasterNodePrivKey, const s
 }
 
 //
-// Bootup the Masternode, look for a 10000 NOMADIC input and register on the network
+// Bootup the Masternode, look for a 0 NOMADIC input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {
